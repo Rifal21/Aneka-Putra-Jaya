@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Produk;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Cviebrock\EloquentSluggable\Services\SlugService;
 
 class DashboardCategoryController extends Controller
@@ -15,7 +16,8 @@ class DashboardCategoryController extends Controller
     public function index()
     {
         return view('dashboard.categories.index',[
-            'categories' => Category::all()
+            'categories' => Category::all(),
+            'title_dashboard' => 'Kategori Produk'
         ]);
     }
 
@@ -25,7 +27,8 @@ class DashboardCategoryController extends Controller
     public function create()
     {
         return view('dashboard.categories.create' , [
-            'categories' => Category::all()
+            'categories' => Category::all(),
+            'title_dashboard' => 'Buat Kategori Produk'
         ]);
     }
 
@@ -36,9 +39,14 @@ class DashboardCategoryController extends Controller
     {
         $validatedData = $request->validate([
             'name' => 'required|max:255',
-            'slug' => 'required|unique:categories'
+            'slug' => 'required|unique:categories',
+            'sample' => 'image|file'
         ]);
 
+        if($request->file('sample')){
+            $validatedData['sample'] = $request->file('sample')->store('sample-produk'); 
+        }
+        
         Category::create($validatedData);
 
         return redirect('/dashboard/categories')->with('success', 'Kategori baru telah ditambahkan!!');
@@ -59,6 +67,7 @@ class DashboardCategoryController extends Controller
     {
         return view('dashboard.categories.edit', [
             'category' => $category,
+            'title_dashboard' => 'Update Kategori Produk'
         ]);
     }
 
@@ -69,7 +78,6 @@ class DashboardCategoryController extends Controller
     {
         $rules = [
             'name' => 'required|max:255',
-            'slug' => 'required|unique:categories'
         ];
 
         if ($request->slug != $category->slug) {
@@ -77,6 +85,13 @@ class DashboardCategoryController extends Controller
         }
 
         $validatedData = $request->validate($rules);
+
+        if($request->file('sample')){
+            if($request->samplelama) {
+                Storage::delete($request->samplelama);
+            }
+            $validatedData['sample'] = $request->file('sample')->store('sample-produk'); 
+        }
 
         Category::where('id', $category->id)->update($validatedData);
 
@@ -87,12 +102,12 @@ class DashboardCategoryController extends Controller
      * Remove the specified resource from storage.
      */
     public function destroy(Category $category , Produk $produk)
-    {
-        if($produk) {
-            Produk::destroy($produk);
+    {   
+        if($category->sample) {
+            Storage::delete($category->sample);
         }
         Category::destroy($category->id);
-        return redirect('/dashboard/categories')->with('success', 'Category has been deleted!');
+        return redirect('/dashboard/categories')->with('success', 'Kategori telah dihapus!');
     }
 
     public function checkSlug(Request $request)

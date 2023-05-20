@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Produk;
 use App\Models\Category;
+use App\Models\Outlet;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Cviebrock\EloquentSluggable\Services\SlugService;
@@ -16,7 +17,8 @@ class DashboardProdukController extends Controller
     public function index()
     {
         return view('dashboard.produk.index',[
-            'produk' => Produk::latest()->filter(request(['search', 'category']))->Paginate(15)->withQueryString(),
+            'produk' => Produk::latest()->filter(request(['search', 'category' , 'outlet']))->Paginate(15)->withQueryString(),
+            'title_dashboard' => 'Semua Produk'
         ]);
     }
 
@@ -26,7 +28,9 @@ class DashboardProdukController extends Controller
     public function create()
     {
         return view('dashboard.produk.create' , [
-            'categories' => Category::all()
+            'categories' => Category::all(),
+            'outlet' => Outlet::all(),
+            'title_dashboard' => 'Tambah Produk'
         ]);
     }
 
@@ -39,6 +43,7 @@ class DashboardProdukController extends Controller
             'nama_produk' => 'required|max:255',
             'slug' => 'required|unique:produks',
             'category_id' => 'required',
+            'outlet_id' => 'required',
             'gambar' => 'image|file',
             'harga' => 'required|max:125',
             'deskripsi' => 'required|max:255'
@@ -47,7 +52,7 @@ class DashboardProdukController extends Controller
         if($request->file('gambar')){
             $validatedData['gambar'] = $request->file('gambar')->store('gambar-produk'); 
         }
-        $validatedData['user_id'] = auth()->user()->id;
+        // $validatedData['user_id'] = auth()->user()->id;
 
         Produk::create($validatedData);
 
@@ -60,7 +65,8 @@ class DashboardProdukController extends Controller
     public function show(Produk $produk)
     {
         return view('dashboard.produk.detail', [
-            'produk_satuan' => $produk
+            'produk_satuan' => $produk,
+            'title_dashboard' => 'Dashboard Detail Produk'
         ]);
         // return $produk;
     }
@@ -72,7 +78,9 @@ class DashboardProdukController extends Controller
     {
         return view('dashboard.produk.edit', [
             'categories' => Category::all(),
-            'produk' => $produk
+            'produk' => $produk,
+            'outlet' => Outlet::all(),
+            'title_dashboard' => 'Update Produk'
         ]);
     }
 
@@ -91,7 +99,7 @@ class DashboardProdukController extends Controller
 
 
         if($request->slug != $produk->slug) {
-            $rules['slug'] = 'required|unique:produk';
+            $rules['slug'] = 'required|unique:produks';
         }
 
         $validatedData = $request->validate($rules);
@@ -103,7 +111,7 @@ class DashboardProdukController extends Controller
             $validatedData['gambar'] = $request->file('gambar')->store('gambar-produk'); 
         }
 
-        $validatedData['user_id'] = auth()->user()->id;
+        // $validatedData['user_id'] = auth()->user()->id;
 
         Produk::where('id', $produk->id)->update($validatedData);
 

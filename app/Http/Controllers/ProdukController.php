@@ -16,11 +16,15 @@ class ProdukController extends Controller
             $category = Category::firstWhere('slug' , request('category'));
             $title = ' di ' . $category->name;
         }
+        if(request('outlet')) {
+            $outlet = Outlet::firstWhere('slug' , request('outlet'));
+            $title = ' di ' . $outlet->name_outlet;
+        }
         return view('produk' ,[
             "title" => "Semua Produk" . $title,
-            'produk' => Produk::latest()->filter(request(['search', 'category']))->Paginate(10)->withQueryString(),
+            'produk' => Produk::latest()->filter(request(['search', 'category' , 'outlet']))->Paginate(10)->withQueryString(),
             'categories' => Category::all(),
-            'outlet' => Outlet::all()
+            'outlets' => Outlet::all()
         ]);
     }
 
@@ -29,9 +33,7 @@ class ProdukController extends Controller
         return view('produkdet', [
             'title' => 'Produk detail',
             'produkdet' => $produk,
-            'outlet' => Outlet::all()
-            
-        ]);
-        
+            'outlets' => Outlet::all()           
+        ]);        
     }
 }

@@ -17,8 +17,8 @@ return new class extends Migration
             $table->string('username')->unique();
             $table->foreignId('role_id')->default(4);
             $table->string('email')->unique();
-            $table->string('foto')->nullable()->default('./img/profile.jpeg');
-            // $table->string('alamat')->nullable();
+            $table->string('foto')->nullable();
+            $table->string('alamat')->nullable();
             // $table->string('outlet')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

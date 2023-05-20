@@ -16,7 +16,7 @@ class BerandaController extends Controller
             'categories' => Category::all(),
             // 'user' => $user->join('role_users' , 'role_users.id' , '=' , 'users.role_id')->where('role_id' , 3)
             'user' => User::all()->where('role_id' , 3),
-            'outlet' => Outlet::all()
+            'outlets' => Outlet::all()
         ]);
     }
 }

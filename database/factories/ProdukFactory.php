@@ -19,9 +19,10 @@ class ProdukFactory extends Factory
         return [
             'nama_produk' => $this->faker->word(3),
             'slug' => $this->faker->slug(),
-            'category_id' => mt_rand(1,3),
+            'category_id' => mt_rand(1,4),
+            'outlet_id' => mt_rand(1,3),
             // 'gambar' => 'furniture',
-            'user_id' => 1,
+            // 'user_id' => 1,
             // 'role_id' => mt_rand(1,3),
             'deskripsi' => $this->faker->paragraph(2),
             'harga' => 'Rp.'. $this->faker->randomFloat()

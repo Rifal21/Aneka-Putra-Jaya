@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Outlet;
+use Illuminate\Support\Facades\Storage;
 use Cviebrock\EloquentSluggable\Services\SlugService;
 
 class DashboardOutletController extends Controller
@@ -14,7 +15,8 @@ class DashboardOutletController extends Controller
     public function index()
     {
         return view('dashboard.outlet.index' , [
-            'outlet' => Outlet::all()
+            'outlet' => Outlet::all(),
+            'title_dashboard' => 'Outlet'
         ]);
     }
 
@@ -24,7 +26,8 @@ class DashboardOutletController extends Controller
     public function create()
     {
         return view('dashboard.outlet.create' , [
-            'outlet' => Outlet::all()
+            'outlet' => Outlet::all(),
+            'title_dashboard' => 'Buat Outlet'
         ]);
     }
 
@@ -35,8 +38,16 @@ class DashboardOutletController extends Controller
     {
         $validatedData = $request->validate([
             'name_outlet' => 'required|max:255',
-            'slug' => 'required|unique:outlets'
+            'slug' => 'required|unique:outlets',
+            'jadwal' => 'required|max:125',
+            'kontak' => 'required|max:13',
+            'kantor' => 'required|max:125',
+            'foto_outlet' => 'image|file'
         ]);
+
+        if($request->file('foto_outlet')){
+            $validatedData['foto_outlet'] = $request->file('foto_outlet')->store('foto-outlet'); 
+        }
 
         Outlet::create($validatedData);
 
@@ -58,6 +69,7 @@ class DashboardOutletController extends Controller
     {
         return view('dashboard.outlet.edit', [
             'outlet' => $outlet,
+            'title_dashboard' => 'Ubah Outlet'
         ]);
     }
 
@@ -68,7 +80,10 @@ class DashboardOutletController extends Controller
     {
         $rules = [
             'name_outlet' => 'required|max:255',
-            'slug' => 'required|unique:outlets'
+            'jadwal' => 'required|max:125',
+            'kontak' => 'required|max:13',
+            'kantor' => 'required|max:125',
+
         ];
 
         if ($request->slug != $outlet->slug) {
@@ -76,6 +91,13 @@ class DashboardOutletController extends Controller
         }
 
         $validatedData = $request->validate($rules);
+
+        if($request->file('foto_outlet')){
+            if($request->foto_outlet_dulu) {
+                Storage::delete($request->foto_outlet_dulu);
+            }
+            $validatedData['foto_outlet'] = $request->file('foto_outlet')->store('foto-outlet'); 
+        }
 
         Outlet::where('id', $outlet->id)->update($validatedData);
 
@@ -87,6 +109,9 @@ class DashboardOutletController extends Controller
      */
     public function destroy(Outlet $outlet)
     {
+        if($outlet->foto_outlet) {
+            Storage::delete($outlet->foto_outlet);
+        }
         Outlet::destroy($outlet->id);
         return redirect('/dashboard/outlet')->with('success', 'Oultet has been deleted!');
     }

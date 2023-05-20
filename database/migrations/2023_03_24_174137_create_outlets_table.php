@@ -15,6 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('name_outlet');
             $table->string('slug');
+            $table->string('kantor')->nullable();
+            $table->integer('kontak')->nullable();
+            $table->string('jadwal')->nullable();
+            $table->string('foto_outlet')->nullable();
             $table->timestamps();
         });
     }

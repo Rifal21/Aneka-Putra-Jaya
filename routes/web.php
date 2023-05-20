@@ -2,6 +2,7 @@
 
 use App\Models\User;
 use App\Models\Category;
+use App\Models\Produk;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProdukController;
@@ -12,7 +13,9 @@ use App\Http\Controllers\DashboardOutletController;
 use App\Http\Controllers\DashboardProdukController;
 use App\Http\Controllers\DashboardCategoryController;
 use App\Http\Controllers\DashboardPenggunaController;
+use App\Http\Controllers\OutletController;
 use App\Models\Outlet;
+use Illuminate\Support\Facades\Redirect;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,10 +38,19 @@ Route::get('/categories' , function() {
   return view('categories' , [
       'title' => "Semua Kategori Produk",
       'categories' => Category::all(),
-      'outlet' => Outlet::all()
+      'outlets' => Outlet::all()
   ]);
 });
 
+Route::get('/outlets', function() {
+  return view('outlets', [
+    'title' => "Semua Outlet",
+    'outlets' => Outlet::all(),
+    'categories' => Category::all()
+  ]);
+});
+
+Route::get('/outletdet/{outlet:slug}' , [OutletController::class , 'show']);
 
 Route::get('/login', [LoginController::class, 'index'])->middleware('guest')->name('login');
 Route::post('/login',[LoginController::class, 'authenticate']);
@@ -52,8 +64,8 @@ Route::get('/dashboard',[DashboardController::class, 'index'])->middleware('admi
 Route::get('/profile/{users:username}' , function(User $user) {
   return view('profile.index' , [
     'title' => 'Profile ' . $user->name,
-    'user' => $user,
-    'outlet' => Outlet::all()
+    'user' => User::join('role_users' , 'users.role_id', '=' ,'role_users.id' )->get(),
+    'outlets' => Outlet::all()
   ]);
 });
 
@@ -80,6 +92,7 @@ Route::delete('/dashboard/pengguna/{user:username}', [DashboardPenggunaControlle
 Route::get('/tentang' , function() {
   return view('tentang', [
     'title' => 'Tentang Kami',
-    'outlet' => Outlet::all()
+    'outlets' => Outlet::all(),
+    'user' => User::all()->where('role_id' , 3),
   ]);
 });

@@ -1,50 +1,20 @@
 @extends('layouts.main')
 
 @section('container')
-<div class="container mx-auto flex flex-col md:flex-row items-center mb-20">
-  <div class="flex flex-col w-full lg:w-1/2 justify-center items-start pt-12 pb-24 md:pb-0 md:pt-0 px-6">
-    @auth
-      <h1 class="text-5xl font-bold leading-tight text-gray-900 mb-8">Selamat datang <span class="font-bold text-secondary italic">{{ auth()->user()->name }}</span> di website resmi <span class="font-bold text-nav italic">X-Sha</span></h1>
-    @else
-      <h1 class="text-5xl font-bold leading-tight text-gray-900 mb-8">Selamat datang di website resmi <span class="font-bold text-secondary italic">X-Sha</span></h1>
-    @endauth
 
-    <p class="text-xl mb-8 leading-normal">Kami menawarkan berbagai macam produk dengan harga yang kompetitif. Telusuri pilihan kami dan temukan apa yang Anda cari hari ini!</p>
-    <a href="/produk" class="bg-secondary hover:bg-fuchsia-700 text-white font-bold py-4 px-8 rounded-lg">Lihat Produk</a>
-  </div>
-  <div class="w-full lg:w-1/2 lg:py-6 text-center">
-    <img src="img/xshacaw.jpg" alt="product" class="w-full rounded-lg shadow-md">
+<div class="relative">
+  <img src="img/benih.jpg" alt="Background Image" class="w-full h-auto">
+  <div class="absolute top-0 left-0 right-0 bottom-0 flex justify-center items-center">
+    <div class="text-white text-center">
+      <h1 class="text-4xl font-bold mb-4">CV. Aneka Putra Jaya</h1>
+      <p class="text-lg">Aneka Putra Jaya ialah perusahaan yang bergerak di bidang agribisnis.</p>
+    </div>
   </div>
 </div>
-{{-- <div class="flex justify-start">
-  <div class="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl">
-    <div class="md:flex mb-3">
-      <div class="md:flex-shrink-0">
-        <img class="h-48 w-full object-cover md:h-full md:w-48" src="./img/visi.jpg" alt="Vision Icon">
-      </div>
-      <div class="p-8">
-        <div class="uppercase tracking-wide text-sm text-indigo-500 font-semibold">Visi Kami</div>
-        <p class="mt-2 text-gray-500">Menjadi perusahaan perdagangan multinasional yang menyediakan produk berkualitas dan halal untuk kebutuhan masyarakat di dunia dengan menjujung tinggi prinsip-prinsip syariat agama islam</p>
-      </div>
-    </div>
-    <div class="md:flex ">
-      <div class="md:flex-shrink-0">
-        <img class="h-48 w-full object-cover md:h-full md:w-48" src="./img/misi.jpg" alt="Mission Icon">
-      </div>
-      <div class="p-8">
-        <div class="uppercase tracking-wide text-sm text-indigo-500 font-semibold">Misi Kami</div>
-        <p class="mt-2 text-gray-500">1. Menyediakan produk yang berkualitas dan halal <br>
-          2. Memberikan pelayanan yang memuaskan dan menyenangkan <br>
-          3. Memberikan kesejahteraan kepada semua unsur yang terlibat( karyawan, owner, investor) <br>
-          4. Memberikan manfaat yang besar untukmasyarakat lingkungan sekitar <br>
-          5. Memberikan kontribusi terhadap kejayaan islam</p>
-      </div>
-    </div>
-  </div>
-</div> --}}
 
-<div class="flex flex-wrap justify-center">
-  <div class="max-w-lg rounded overflow-hidden shadow-lg m-4 px-5 mb-5">
+
+<div class="flex flex-wrap justify-center bg-slate-100">
+  <div class="max-w-lg rounded overflow-hidden shadow-lg m-4 px-5 mb-5 bg-white">
     <img class="w-full" src="./img/visi.jpg" alt="Card image">
     <div class="px-6 py-4">
       {{-- <i class="fas fa-tachometer-alt-fast"></i> --}}
@@ -52,7 +22,7 @@
       <p class="mt-2 text-gray-500 text-justify">Menjadi perusahaan perdagangan multinasional yang menyediakan produk berkualitas dan halal untuk kebutuhan masyarakat di dunia dengan menjujung tinggi prinsip-prinsip syariat agama islam</p>
     </div>
   </div>
-  <div class="max-w-lg rounded overflow-hidden shadow-lg m-4 px-5 mb-5">
+  <div class="max-w-lg rounded-lg overflow-hidden shadow-lg m-4 px-5 mb-5 bg-white ">
     <img class="w-full" src="./img/visi.jpg" alt="Card image">
     <div class="px-6 py-4">
       <div class="font-bold text-xl mb-2 text-center uppercase hover:text-secondary">Misi</div>
@@ -63,6 +33,23 @@
         5. Memberikan kontribusi terhadap kejayaan islam</p>
     </div>
   </div>
+</div>
+
+<h1 class="text-2xl font-bold text-center uppercase mb-3">Team</h1>
+<div class="flex justify-center">
+  <p class="border-b-2 w-1/3 border-black "></p>
+</div>
+<div class="flex flex-wrap justify-center">
+  @foreach ($user as $item)
+  <div class="max-w-sm rounded overflow-hidden shadow-lg m-4 px-5 mb-5">
+    <img class="w-full" src="{{ asset('storage/'.$item->foto)  }}" alt="Card image">
+    <div class="px-6 py-4">
+      <div class="font-bold text-xl mb-2 text-center uppercase">{{ $item->name }}</div>
+      <p class="font-base text-xl mb-2 text-center ">{{ $item->email }}</p>
+    </div>
+  </div>
+  @endforeach
+  
 </div>
 
 @endsection

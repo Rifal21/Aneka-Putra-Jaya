@@ -24,10 +24,19 @@ class Produk extends Model
                 $query->where('slug', $category); 
             });
         });
+        $query->when($filters['outlet'] ?? false , function($query , $category) {
+            return $query->whereHas('outlet' , function($query) use($category) {
+                $query->where('slug', $category); 
+            });
+        });
     }
     public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+    public function outlet()
+    {
+        return $this->belongsTo(Outlet::class);
     }
     public function user()
     {

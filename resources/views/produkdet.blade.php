@@ -1,34 +1,66 @@
 @extends('layouts.main')
 
 @section('container')
-  <div class="min-h-screen bg-gray-100 flex flex-col justify-center">
-    <div class="relative m-3 flex flex-wrap mx-auto justify-center">
-      <div class="min-w-[340px]flex flex-col group">
-        <div class="h-48 md:h-56 lg:h-[24rem] w-full bg-red-500 border-2 border-white flex items-center justify-center text-white text-base mb-3 md:mb-5 overflow-hidden relative">
-          @if ($produkdet->gambar)
-              <img src="{{ asset('storage/' . $produkdet->gambar) }}" class="object-cover w-full h-full scale-100 group-hover:scale-110 transition-all duration-400" alt="">
-          @else
-              <img src="https://source.unsplash.com/500x400?{{ $produkdet->category->name }}" class="object-cover w-full h-full scale-100 group-hover:scale-110 transition-all duration-400" alt="">
-          @endif
-              
-              <div class="absolute z-10 border-4 border-primary w-[95%] h-[95%] invisible group-hover:visible opacity-0 group-hover:opacity-100 group-hover:scale-90 transition-all duration-500"></div>
+
+  <div class="max-w-4xl mx-auto mt-48 px-10">
+    <div class="flex flex-wrap my-4">
+      <div class="w-full md:w-1/2 md:pr-8">
+        @if ($produkdet->gambar)
+            <img src="{{ asset('storage/' . $produkdet->gambar) }}" class="object-cover w-full h-full transition-all duration-300 ease-in-out transform hover:scale-110" alt="">
+        @else
+            <img src="../../img/padi.jpeg" class="object-cover w-full h-full transition-all duration-300 ease-in-out transform hover:scale-110" alt="">
+        @endif
+      </div>
+      <div class="w-full md:w-1/2">
+        <h2 class="text-3xl font-bold mb-4">{{$produkdet->nama_produk}}</h2>
+        <div class="flex mb-2">
+          <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">{{ $produkdet->category->name }}</span>
+          <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700">{{ $produkdet->outlet->name_outlet }}</span>
         </div>
-        <h1 class=" block text-black text-center hover:text-primary transition-colors duration-150 text-lg md:text-xl mb-1 uppercase">{{$produkdet->nama_produk}}</h1>
-        <div class="text-center"><a href="/produk?category={{ $produkdet->category->slug}}" class="uppercase tracking-wide text-sm text-indigo-500 font-semibold">{{ $produkdet->category->name }}</a></div>
-          <p class="mb-4 font-light  text-sm md:text-sm text-center text-gray-400">{{ $produkdet->deskripsi }}</p>
-          <div class="mt-5 mb-10 text-center">
-            <span class="text-gray-500">Harga:</span>
-            <span class="font-bold text-gray-700">{{ $produkdet->harga }}</span>
-          </div>
-          <div class="flex justify-center gap-x-3">
+        <p class="text-gray-700 text-lg mb-4">{{ $produkdet->deskripsi }}</p>
+        <div class="mb-4">
+          <div class="text-xl font-bold mb-2">Harga : {{ $produkdet->harga }},-</div>
+          {{-- <div class="text-gray-700 text-base mb-2">Stok Tersedia: 10</div> --}}
+        </div>
+        {{-- <div class="mb-4">
+          <label for="jumlah" class="block text-gray-700 font-bold mb-2">Jumlah:</label>
+          <input type="number" id="jumlah" name="jumlah" min="1" value="1" class="w-full rounded-lg border border-gray-400 p-2 text-gray-700">
+        </div> --}}
+          <p class="font-semibold mb-5">Pesan produk melalui :</p>
+          {{-- <div class="flex mr-15 md:w-1/2">
             @auth
-              <a href="https://api.whatsapp.com/send?phone=6287749323752&text=Hallo%20Admin!%0ASaya%20ingin%20memesan%20barang%20{{ $produkdet->nama_produk }}%0AHarga:{{ $produkdet->harga }}%0ANama_lengkap:%20{{ auth()->user()->name }}" class=" px-5 py-2 border border-green-500 text-white bg-green-500 hover:bg-green-400  transition-all outline-none bg-nav border-nav hover:text-nav  font-bold rounded-full"><i class="fab fa-whatsapp mr-3"></i>Hubungi lewat whatsapp</a>
+              <a href="https://api.whatsapp.com/send?phone=6287749323752&text=Hallo%20Admin!%0ASaya%20ingin%20memesan%20barang%20{{ $produkdet->nama_produk }}%0AHarga:{{ $produkdet->harga }}%0ANama_lengkap:%20{{ auth()->user()->name }}" class="border-solid border-2 border-white bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-8 rounded-full"><img src="../img/ico-whatsapp.png" width="24">Whatsapp</a>
+              <a href="https://api.whatsapp.com/send?phone=6287749323752&text=Hallo%20Admin!%0ASaya%20ingin%20memesan%20barang%20{{ $produkdet->nama_produk }}%0AHarga:{{ $produkdet->harga }}%0ANama_lengkap:%20{{ auth()->user()->name }}" class="border-solid border-2 border-white bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full"><img src="../img/ico-whatsapp.png" width="26" class="mr-2">Whatsapp</a>
+              <a href="https://api.whatsapp.com/send?phone=6287749323752&text=Hallo%20Admin!%0ASaya%20ingin%20memesan%20barang%20{{ $produkdet->nama_produk }}%0AHarga:{{ $produkdet->harga }}%0ANama_lengkap:%20{{ auth()->user()->name }}" class="border-solid border-2 border-white bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full"><img src="../img/ico-whatsapp.png" width="26" class="mr-2">Whatsapp</a>
             @endauth
-              <a href="/produk" class=" px-5 py-2 border border-primary text-white bg-primary hover:bg-secondary  transition-all outline-none bg-nav border-nav hover:text-nav  font-bold rounded-full"><i class="fas fa-arrow-left mr-3"></i>Kembali ke produk</a>
+            <a href="/produk" class=" px-5 py-2 border border-primary text-white bg-primary hover:bg-secondary  transition-all outline-none bg-nav border-nav hover:text-nav  font-bold rounded-full"><i class="fas fa-arrow-left mr-3"></i>Kembali</a>
+          </div> --}}
+          <div class="flex flex-wrap justify-center items-center space-x-4">
+            <a @auth
+                href="https://api.whatsapp.com/send?phone=6287749323752&text=Hallo%20Admin!%0ASaya%20ingin%20memesan%20{{ $produkdet->nama_produk }}%0AHarga:%20{{ $produkdet->harga }}%0ANama_lengkap:%20{{ auth()->user()->name }}%0AAlamat:%20{{ auth()->user()->alamat }}" @else href="/login"
+                @endauth target="_blank" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-8 rounded-full flex items-center justify-center transition-all duration-300 ease-in-out transform hover:scale-110 mb-3">
+              <img src="../img/ico-whatsapp.png" alt="" class="mr-2" width="26" >
+              <span>WhatsApp</span>
+            </a>
+            <a href="#" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-9 rounded-full flex items-center justify-center transition-all duration-300 ease-in-out transform hover:scale-110 mb-3">
+              <img src="../img/ico-tokopedia.svg" alt="" class="mr-2">
+              <span>Tokopedia</span>
+            </a>
+            <a href="#" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-8 rounded-full flex items-center justify-center transition-all duration-300 ease-in-out transform hover:scale-110 mb-3">
+              <img src="../img/ico-shopee.svg" alt="" class="mr-2">
+              <span>Shopee</span>
+            </a>
+            <a href="/produk" class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-6 rounded-full flex items-center justify-center transition-all duration-300 ease-in-out transform hover:scale-110 mb-3">
+              <i class="fas fa-arrow-left mr-3"></i>
+              <span>Kembali</span>
+            </a>
+            
           </div>
-        </div>
+          
+
+        
       </div>
     </div>
   </div>
-
+  
 @endsection

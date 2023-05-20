@@ -12,9 +12,9 @@ class RegisterController extends Controller
     public function index()
     {
         return view('registrasi.index', [
-            'title' => "Buat Akun X-Sha",
-            'gambar' => 'xsha.png',
-            'outlet' => Outlet::all()
+            'title' => "Registrasi Akun",
+            'gambar' => 'anekalogo.png',
+            'outlets' => Outlet::all()
         ]);
     }
 
@@ -22,11 +22,16 @@ class RegisterController extends Controller
     {
         $validatedData = $request->validate([
             'name' => ['required' , 'max:125' ],
+            'alamat' => 'max:255',
+            'foto' => 'image|file',
             'username' => ['required' ,'min:3', 'max:125' , 'unique:users'],
             'email' => 'required|email:dns|unique:users',
             'password' => 'required|min:5|max:125'
         ]);
 
+        if($request->file('foto')){
+            $validatedData['foto'] = $request->file('foto')->store('foto'); 
+        }
         $validatedData['password'] = Hash::make($validatedData['password']);
 
         User::create($validatedData);

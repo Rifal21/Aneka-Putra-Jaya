@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Category;
+use App\Models\Outlet;
 use App\Models\User;
 use App\Models\Produk;
 use App\Models\RoleUser;
@@ -16,7 +17,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        Produk::factory(200)->create();
+        Produk::factory(10000)->create();
 
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',
@@ -31,21 +32,41 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('falkur21')
         ]);
 
-        Category::create([
-            'name' => 'Fashion',
-            'slug' => 'fashion'
+        Outlet::create([
+            'name_outlet' => 'Ciawi',
+            'slug' => 'ciawi'
+        ]);
+        Outlet::create([
+            'name_outlet' => 'Malangbong',
+            'slug' => 'malangbong'
+        ]);
+        Outlet::create([
+            'name_outlet' => 'Pasar Ciawi',
+            'slug' => 'pasar-ciawi'
         ]);
         Category::create([
-            'name' => 'Cosmetics',
-            'slug' => 'cosmetics'
+            'name' => 'Pupuk Organik',
+            'slug' => 'pupuk'
+        ]);
+        // Category::create([
+        //     'name' => 'Alat Pertanian',
+        //     'slug' => 'alat-pertanian'
+        // ]);
+        // Category::create([
+        //     'name' => 'Benih Pertanian',
+        //     'slug' => 'benih-pertanian'
+        // ]);
+        Category::create([
+            'name' => 'Pupuk Non-organik',
+            'slug' => 'pupuk-non-organik'
         ]);
         Category::create([
-            'name' => 'Furniture',
-            'slug' => 'furniture'
+            'name' => 'Pupuk Kimia',
+            'slug' => 'pupuk-kimia'
         ]);
         Category::create([
-            'name' => 'Hijab',
-            'slug' => 'hijab'
+            'name' => 'Pupuk Hidroponik',
+            'slug' => 'pupuk-hidroponik'
         ]);
         RoleUser::create([
             'name_role' => 'admin',

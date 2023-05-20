@@ -17,6 +17,7 @@ class DashboardPenggunaController extends Controller
     {
         return view('dashboard.pengguna.index',[
             'users' => User::join('role_users' , 'users.role_id', '=' ,'role_users.id' )->get(),
+            'title_dashboard' => 'Human Resource'
         ]);
     }
 
@@ -26,7 +27,8 @@ class DashboardPenggunaController extends Controller
     public function create()
     {
         return view('dashboard.pengguna.create' , [
-            'role'=> RoleUser::all()
+            'role'=> RoleUser::all(),
+            'title_dashboard' => 'Tambah Pengguna'
         ]);
     }
 
@@ -41,6 +43,7 @@ class DashboardPenggunaController extends Controller
             'role_id' => 'required',
             'email' => 'required|email:dns|unique:users',
             'foto' => 'image|file',
+            'alamat' => 'required|max:125',
             'password' => 'required|min:5|max:125'
         ]);
 
@@ -63,7 +66,8 @@ class DashboardPenggunaController extends Controller
         
         return view('dashboard.pengguna.detail', [
             'user' => $user,
-            'role' => RoleUser::all()
+            'users' => User::join('role_users' , 'users.role_id', '=' ,'role_users.id' )->get(),
+            'title_dashboard' => 'Detail Pengguna'
         ]);
         // return $user;
     }
@@ -76,6 +80,7 @@ class DashboardPenggunaController extends Controller
         return view('dashboard.pengguna.edit' , [
             'user' => $user,
             'role' => RoleUser::all(),
+            'title_dashboard' => 'Ubah Detail Pengguna'
         //    'user' => $user->join('role_users' , 'users.role_id', '=' ,'role_users.id' )->get(),
         ]);
     }
@@ -87,11 +92,10 @@ class DashboardPenggunaController extends Controller
     {
         $rules = [
             'name' => ['required' , 'max:125' ],
-            'username' => ['required' ,'min:3', 'max:125' , 'unique:users'],
             'role_id' => 'required',
-            'email' => 'required|email:dns|unique:users',
             'foto' => 'image|file',
-            'password' => 'required|min:5|max:125'
+            'password' => 'required|min:5|max:125',
+            'alamat' => 'required|max:125',
         ];
 
 
@@ -99,6 +103,10 @@ class DashboardPenggunaController extends Controller
             $rules['username'] = 'required|unique:users';
             $rules['email'] = 'required|email:dns|unique:users';
         }
+
+        // if ($request->email != $user->email){
+        //     $rules['email'] = 'required|email:dns|unique:users';
+        // }
 
         $validatedData = $request->validate($rules);   
 
@@ -108,11 +116,11 @@ class DashboardPenggunaController extends Controller
             }
             $validatedData['foto'] = $request->file('foto')->store('foto'); 
         }
-
+        $validatedData['password'] = Hash::make($validatedData['password']);
 
         User::where('id', $user->id)->update($validatedData);
 
-        return redirect('/dashboard/pengguna')->with('success' , 'Produk baru berhasil diupdate!');
+        return redirect('/dashboard/pengguna')->with('success' , 'Pengguna berhasil diupdate!');
 
     
         

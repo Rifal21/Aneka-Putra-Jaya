@@ -15,7 +15,7 @@ return new class extends Migration
         Schema::create('produks', function (Blueprint $table) {
             $table->id();
             $table->foreignId('category_id');
-            $table->foreignId('user_id');
+            $table->foreignId('outlet_id');
             $table->string('nama_produk');
             $table->string('slug')->unique();
             $table->string('gambar')->nullable();

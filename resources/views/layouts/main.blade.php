@@ -1,11 +1,11 @@
 <!doctype html>
-<html>
+<html class="scroll-smooth">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   @vite('resources/css/app.css','resources/js/app.js')
-  <link rel="icon" href="../img/xsha.png">
-  <title>X-Sha | {{ $title }}</title>
+  <link rel="icon" href="../img/anekalogonobg.png">
+  <title>Aneka Putra Jaya | {{ $title }}</title>
 </head>
 <body>
   
@@ -13,7 +13,7 @@
   @include('partials.navbar')
 
 
-  <div class="mt-24">
+  <div class="mt-20">
       @yield('container')
   </div>
 

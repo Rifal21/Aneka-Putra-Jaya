@@ -12,6 +12,10 @@ class Outlet extends Model
 
     protected $guarded = ['id'];
     
+    public function produk()
+    {
+        return $this->hasMany(Produk::class);
+    }
     public function getRouteKeyName()
     {
         return 'slug';

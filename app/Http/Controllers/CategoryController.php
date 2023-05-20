@@ -11,7 +11,7 @@ class CategoryController extends Controller
     {
         return view('categories',[
             'title' => 'Semua Kategori Produk',
-            'outlet' => Outlet::all()
+            'outlets' => Outlet::all()
         ]);
     }
 }

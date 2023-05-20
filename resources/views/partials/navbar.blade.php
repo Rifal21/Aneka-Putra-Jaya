@@ -1,15 +1,20 @@
-<nav class="bg-white px-2 sm:px-4 py-2.5 dark:bg-gray-900 fixed w-full z-20 top-0 left-0 border-b border-gray-200 dark:border-gray-600">
+<nav class="bg-white px-2 sm:px-4 py-2.5 dark:bg-gray-900 fixed w-full z-20 top-0 left-0 border-b border-gray-200 dark:border-gray-600 shadow-lg">
   <div class="container flex flex-wrap items-center justify-between mx-auto">
   <a href="/" class="flex items-center">
-      <img src="/img/xsha.png" class="h-6 mr-3 sm:h-9" alt="xsha Logo">
+      <img src="/img/anekalogonobg.png" class="w-16" alt="aneka Logo">
   </a>
   <div class="flex md:order-2">
     @auth
       <div class="flex items-center md:order-2">
           <button type="button" class="flex mr-3 ml-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
-            <img class="w-8 h-8 rounded-full" src="{{ asset('storage/'. auth()->user()->foto) }}" alt="user photo">
+            @if (auth()->user()->foto)
+              <img class="object-cover w-8 h-8 rounded-full" src="{{ asset('storage/' . auth()->user()->foto) }}" alt="" aria-hidden="true"
+            />
+            @else
+                <img src="../../img/profile.jpeg" class="object-cover w-8 h-8 rounded-full" alt="">
+            @endif
           </button>
-          <!-- Dropdown menu -->
+          
           <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600" id="user-dropdown">
             <div class="px-4 py-3">
               <span class="block text-sm text-gray-900 dark:text-white">{{ auth()->user()->name }}</span>
@@ -34,7 +39,7 @@
           </div>
       </div>
     @else
-      <a href="/login" class="text-white bg-secondary hover:bg-fuchsia-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 ">Masuk</a>
+      <a href="/login" class="text-white bg-secondary hover:bg-hov focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 ">Masuk</a>
     @endauth
       <button data-collapse-toggle="navbar-sticky" type="button" class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-sticky" aria-expanded="false">
         <span class="sr-only">Open main menu</span>
@@ -54,9 +59,12 @@
           <!-- Dropdown menu -->
           <div id="dropdownNavbar" class="z-10 hidden font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
               <ul class="py-2 text-sm text-gray-700 dark:text-gray-400 {{ Request::is('dropdownNavbarLink') ? 'active' : '' }}" aria-labelledby="dropdownLargeButton">
-                @foreach ($outlet as $item)
+                <li>
+                  <a href="/outlets" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white text-sm">Semua Outlet</a>
+                </li>
+                @foreach ($outlets as $item)
                   <li>
-                    <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white text-sm">{{ $item->name_outlet }}</a>
+                    <a href="/outletdet/{{ $item->slug}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white text-sm">{{ $item->name_outlet }}</a>
                   </li>
                 @endforeach
 
@@ -64,9 +72,38 @@
           </div>
       </li>
       <li>
-        <a href="/tentang" class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-hov md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700 {{ Request::is('tentang') ? 'active' : '' }}">Tentang</a>
+        <a href="/tentang" class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-hov md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700 {{ Request::is('tentang') ? 'active' : '' }}">Tentang Kami</a>
       </li>
     </ul>
   </div>
   </div>
 </nav>
+
+{{-- <nav class="bg-gray-800">
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="flex items-center justify-between h-16">
+      <div class="flex items-center">
+        <a href="#" class="text-white text-lg font-semibold">Logo</a>
+      </div>
+      <div class="hidden md:block">
+        <ul class="flex space-x-4">
+          <li class="relative group">
+            <a href="#" class="text-gray-300 hover:text-white px-2 py-1">Menu 1</a>
+            <div class="absolute left-0 hidden group-hover:block bg-gray-800 w-32 py-2 mt-2">
+              <a href="#" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700">Submenu 1</a>
+              <a href="#" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700">Submenu 2</a>
+              <a href="#" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700">Submenu 3</a>
+            </div>
+          </li>
+          <li>
+            <a href="#" class="text-gray-300 hover:text-white px-2 py-1">Menu 2</a>
+          </li>
+          <li>
+            <a href="#" class="text-gray-300 hover:text-white px-2 py-1">Menu 3</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav> --}}
+

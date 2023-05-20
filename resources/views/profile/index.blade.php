@@ -2,41 +2,61 @@
 
 @section('container')
 
-<div class="flex justify-center mt-16">
-    <div class="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-        <div class="flex justify-end px-4 pt-4">
-            <button id="dropdownButton" data-dropdown-toggle="dropdown" class="inline-block text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-1.5" type="button">
-                <span class="sr-only">Open dropdown</span>
-                <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z"></path></svg>
-            </button>
-            <!-- Dropdown menu -->
-            <div id="dropdown" class="z-10 hidden text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
-                <ul class="py-2" aria-labelledby="dropdownButton">
-                {{-- <li>
-                    <a href="/profile/{{ $user->username }}/edit" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Edit</a>
-                </li> --}}
-                {{-- <li>
-                    <a href="#" class="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Logout</a>
-                </li> --}}
-                <form action="/logout" method="POST" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
-                    @csrf 
-                    <button type="submit" class="text-red-600">Keluar</button>
-                  </form>
-                </ul>
-            </div>
+<section class="pt-14 dark:bg-dark p-36">
+    <div class="container">
+      <div class="flex flex-wrap">
+        <div class="w-full self-center px-4 lg:w-1/2">
+          <h1 class="text-base font-bold text-primary md:text-xl greet">
+             Hallo 👋, saya
+            <span class="block font-bold text-dark text-4xl mt-1 lg:text-5xl dark:text-white">{{ auth()->user()->name }}</span> 
+          </h1>
+          <h2 class="font-medium text-secondary text-lg mb-1 lg:text-2xl job">
+             Username : 
+            <span class="text-dark font-bold dark:text-white">{{ auth()->user()->username }}</span> 
+          </h2>
+          <p class="font-medium text-secondary mb-1 leading-relaxed moto">
+            Email :
+            <span class="text-dark font-bold dark:text-white">{{ auth()->user()->email }}</span> 
+          </p>
+          <p class="font-medium text-secondary mb-10 leading-relaxed moto">
+            Alamat :
+            <span class="text-dark font-bold dark:text-white">{{ auth()->user()->alamat }}</span> 
+          </p>
         </div>
-        <div class="flex flex-col items-center pb-10 mb-10">
-            <img class="w-48 h-48 mb-5 rounded-full shadow-lg" src="{{ asset('storage/'.auth()->user()->foto) }}" alt="user image"/>
-            <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">{{ auth()->user()->name }}</h5>
-            <span class="text-sm text-gray-500 dark:text-gray-400">{{ auth()->user()->username }}</span>
-            <span class="text-md text-gray-500 dark:text-gray-400">{{ auth()->user()->email }}</span>
-            <div class="flex justify-center mt-4 space-x-3 md:mt-6">
-                <a href="#" class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add friend</a>
-                {{-- <a href="#" class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-700">Message</a> --}}
-            </div>
+        <div class="w-full self-end px-4 lg:w-1/2">
+          <div class="relative mt-10 lg:mt-9 lg:right-0">
+            @if (auth()->user()->foto)
+                <img src="{{ asset('storage/' . auth()->user()->foto) }}" alt="Profile Picture"  class="max-w-full mx-auto relative z-10">
+            @else
+                <img src="../../img/profile.jpeg" class="max-w-full mx-auto relative z-10 rounded-full" alt="">
+            @endif
+            <span
+              class="absolute -bottom-0  left-1/2 -translate-x-1/2 md:scale-100"
+            >
+              <svg
+                width="400"
+                height="400"
+                viewBox="0 0 200 200"
+                xmlns="http://www.w3.org/2000/svg"
+                data-aos="zoom-out" data-aos-duration="1200"
+              >
+                <path
+                  fill="#14b8a6"
+                  d="M31.7,-55C43,-48.4,55.3,-43.7,60.9,-34.9C66.5,-26,65.4,-13,63.4,-1.1C61.5,10.7,58.7,21.5,54.9,33.6C51.2,45.7,46.6,59.2,37.3,63.4C28,67.6,14,62.6,2.4,58.4C-9.2,54.2,-18.4,51,-29.9,48.1C-41.5,45.2,-55.4,42.6,-64.6,34.6C-73.9,26.7,-78.5,13.3,-76.8,1C-75.1,-11.4,-67.1,-22.8,-59.2,-33.1C-51.3,-43.4,-43.5,-52.6,-33.7,-60C-23.8,-67.4,-11.9,-72.9,-0.8,-71.5C10.2,-70,20.4,-61.6,31.7,-55Z"
+                  transform="translate(100 100)"
+                />
+              </svg>
+            </span>
+          </div>
         </div>
+      </div>
     </div>
-</div>
+</section>
+  
+
+  
+
+  
 
 
 @endsection

@@ -1,9 +1,12 @@
-<div class="flex items-center justify-between flex-wrap p-4 ">
+<div class="flex items-center justify-between flex-wrap p-5 pt-10 ">
   <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto ">
     <div class="text-sm lg:flex-grow">
       <form action="/produk">
         @if (request('category'))
             <input type="hidden" name="category" value="{{ request('category') }}">
+        @endif
+        @if (request('outlet'))
+            <input type="hidden" name="outlet" value="{{ request('outlet') }}">
         @endif
         <div class="relative">
           <input type="text" class="bg-gray-200 text-dark rounded-full border-2 border-white focus:outline-none focus:border-gray-500 py-2 px-4 pl-12 w-full" placeholder="Cari Produk.." name="search" value="{{ request('search') }}">
