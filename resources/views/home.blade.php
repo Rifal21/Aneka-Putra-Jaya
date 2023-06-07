@@ -44,6 +44,30 @@
   </div>
 </section>
 
+<section id="produk" class=" pb-10">
+  <h1 class="text-2xl font-bold text-center uppercase mb-3 text-dark pt-10">Otlet Kami</h1>
+  <div class="flex justify-center mb-20">
+    <p class="border-b-2 w-1/3 border-black"></p>
+  </div>
+  <div class="flex flex-wrap justify-center">
+    @foreach ($outlets as $item)
+      <div class="max-w-sm rounded overflow-hidden shadow-lg m-4 px-5 mb-5 bg-white transition-all duration-300 ease-in-out transform hover:scale-110 ">
+        @if ($item->foto_outlet)
+          <img src="{{ asset('storage/' . $item->foto_outlet) }}" class="w-full" alt="">
+        @else
+          <img src="../../img/kantor.jpg" class="w-full" alt="">
+        @endif
+        <div class="px-6 w-full py-4 hover:text-secondary">
+          <div class="font-bold text-xl mb-2 text-center uppercase "><a href="/outletdet/{{ $item->slug }}">{{ $item->name_outlet }}</a></div>
+        </div>
+      </div>
+    @endforeach
+  </div>
+  <div class="flex flex-wrap justify-center">
+    <a href="/produk" class="bg-secondary hover:bg-hov text-white font-bold py-4 px-8 rounded-lg">Lihat Semua Outlet</a>
+  </div>
+</section>
+
 
 
 @endsection

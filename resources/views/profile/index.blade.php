@@ -21,8 +21,19 @@
           <p class="font-medium text-secondary mb-10 leading-relaxed moto">
             Alamat :
             <span class="text-dark font-bold dark:text-white">{{ auth()->user()->alamat }}</span> 
-          </p>
+          </p>        
+          <div class="flex flex-wrap justify-between">
+            <a href="#" class="bg-secondary hover:bg-hov text-white font-bold py-4 px-8 rounded-lg mb-3" onclick="return alert('Cooming Soon.. 🙏😊')"><i class="fas fa-user-edit"></i> Edit Profile</a>
+          </div>
+          <div class="flex flex-wrap justify-between">
+            <form action="/logout" method="POST" class="bg-red-600 hover:bg-red-500 text-white font-bold py-4 px-8 rounded-lg mb-3">
+              @csrf 
+              <button type="submit" ><i class="fas fa-sign-out-alt"></i> Keluar</button>
+            </form>
+            {{-- <a href="#" class="bg-red-600 hover:bg-red-500 text-white font-bold py-4 px-8 rounded-lg mb-3" onclick="return alert('Cooming Soon.. 🙏😊')"><i class="fas fa-sign-out-alt"></i> Logout</a> --}}
+          </div>
         </div>
+
         <div class="w-full self-end px-4 lg:w-1/2">
           <div class="relative mt-10 lg:mt-9 lg:right-0">
             @if (auth()->user()->foto)

@@ -1,8 +1,8 @@
 @extends('layouts.main')
 
 @section('container')
-@include('partials.searchbar')
-<h1 class="text-center font-bold text-2xl mb-5">{{ $title }}</h1>
+{{-- @include('partials.searchbar') --}}
+<h1 class="text-center font-bold text-2xl mb-5 pt-10">{{ $title }}</h1>
 <div class="flex overflow-x-auto ml-3 mb-10 flex-wrap justify-center">
         @foreach ($outlets as $outlet)
           {{-- <div class="flex-shrink-0 w-72 p-4 bg-white border border-gray-200 rounded-md shadow-md mr-4">

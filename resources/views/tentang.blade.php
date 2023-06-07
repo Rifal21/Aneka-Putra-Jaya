@@ -23,7 +23,7 @@
     </div>
   </div>
   <div class="max-w-lg rounded-lg overflow-hidden shadow-lg m-4 px-5 mb-5 bg-white ">
-    <img class="w-full" src="./img/visi.jpg" alt="Card image">
+    <img class="w-full" src="./img/misi.jpg" alt="Card image">
     <div class="px-6 py-4">
       <div class="font-bold text-xl mb-2 text-center uppercase hover:text-secondary">Misi</div>
       <p class="mt-2 text-gray-500 text-start">1. Menyediakan produk yang berkualitas dan halal <br>
@@ -42,7 +42,11 @@
 <div class="flex flex-wrap justify-center">
   @foreach ($user as $item)
   <div class="max-w-sm rounded overflow-hidden shadow-lg m-4 px-5 mb-5">
-    <img class="w-full" src="{{ asset('storage/'.$item->foto)  }}" alt="Card image">
+    @if ($item->foto)
+          <img src="{{ asset('storage/' . $item->foto) }}" class="w-full" alt="">
+        @else
+          <img src="../../img/profile.jpeg" class="w-full" alt="">
+        @endif
     <div class="px-6 py-4">
       <div class="font-bold text-xl mb-2 text-center uppercase">{{ $item->name }}</div>
       <p class="font-base text-xl mb-2 text-center ">{{ $item->email }}</p>
