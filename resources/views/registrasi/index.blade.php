@@ -29,8 +29,17 @@
         </div>        
         <div>
             <label for="alamat" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Alamat</label>
-            <input type="text" name="alamat" id="alamat" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white @error('alamat') is-invalid @enderror mb-3" placeholder="Alamat lengkap" required value="{{ old('nama') }}">
+            <input type="text" name="alamat" id="alamat" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white @error('alamat') is-invalid @enderror mb-3" placeholder="Alamat lengkap" required value="{{ old('alamat') }}">
             @error('alamat')
+            <span class="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1">
+              {{ $message }}
+            </span>
+            @enderror
+        </div>
+        <div>
+            <label for="no_hp" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">No HP</label>
+            <input type="text" name="no_hp" id="no_hp" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white @error('no_hp') is-invalid @enderror mb-3" placeholder="No. HP" required value="{{ old('no_hp') }}">
+            @error('no_hp')
             <span class="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1">
               {{ $message }}
             </span>

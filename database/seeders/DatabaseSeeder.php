@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        Produk::factory(10000)->create();
+        Produk::factory(20)->create();
 
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',
@@ -29,6 +29,23 @@ class DatabaseSeeder extends Seeder
             'username' => 'falkur21',
             'email' => 'falkur@gmail.com',
             'role_id' => 1,
+            'no_hp' => '087654234677',
+            'password' => bcrypt('falkur21')
+        ]);
+        User::create([
+            'name' => 'Rifal Kurniawan',
+            'username' => 'falkur212',
+            'email' => 'falkur1@gmail.com',
+            'role_id' => 2,
+            'no_hp' => '087654234677',
+            'password' => bcrypt('falkur21')
+        ]);
+        User::create([
+            'name' => 'Rifal Kurniawan',
+            'username' => 'falkur213',
+            'email' => 'falkur2@gmail.com',
+            'role_id' => 3,
+            'no_hp' => '087654234677',
             'password' => bcrypt('falkur21')
         ]);
 

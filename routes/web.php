@@ -16,7 +16,8 @@ use App\Http\Controllers\DashboardPenggunaController;
 use App\Http\Controllers\OutletController;
 use App\Models\Outlet;
 use Illuminate\Support\Facades\Redirect;
-
+use App\Http\Middleware\Pegawai;
+use App\Http\Middleware\Admin;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -74,7 +75,7 @@ Route::get('/dashboard/produk/checkSlug' , [DashboardProdukController::class , '
 Route::get('/dashboard/categories/checkSlug' , [DashboardCategoryController::class , 'checkSlug'])->middleware('auth');
 Route::get('/dashboard/outlet/checkSlug' , [DashboardOutletController::class , 'checkSlug'])->middleware('auth');
 
-Route::middleware('admin')->group(function () { 
+Route::group(['middleware' => ['admin']] ,function () { 
   Route::resource('/dashboard/categories', DashboardCategoryController::class)->except('show');
   Route::resource('/dashboard/produk', DashboardProdukController::class);
   Route::resource('/dashboard/outlet', DashboardOutletController::class);
@@ -93,6 +94,7 @@ Route::get('/tentang' , function() {
   return view('tentang', [
     'title' => 'Tentang Kami',
     'outlets' => Outlet::all(),
-    'user' => User::all()->where('role_id' , 3),
+    'users' => User::join('role_users' , 'users.role_id', '=' ,'role_users.id' )->get()->where('role_id' ,'<=', 3),
+    // 'user' => User::all()->where('role_id' , 3),
   ]);
 });

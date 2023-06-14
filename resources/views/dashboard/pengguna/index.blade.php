@@ -26,6 +26,7 @@
             <th class="px-4 py-3">Nama Lengkap</th>
             <th class="px-4 py-3">Username</th>
             <th class="px-4 py-3">Email</th>
+            <th class="px-4 py-3">No HP</th>
             <th class="px-4 py-3">Foto</th>
             <th class="px-4 py-3">Role</th>
             <th class="px-4 py-3">Action</th>
@@ -47,6 +48,9 @@
             </td>
             <td class="px-4 py-3 text-sm">
               {{ $item->email }}
+            </td>
+            <td class="px-4 py-3 text-sm">
+              {{ $item->no_hp }}
             </td>
             <td class="px-4 py-3 text-sm">
               @if ($item->foto)

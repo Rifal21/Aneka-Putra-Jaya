@@ -26,7 +26,8 @@ class RegisterController extends Controller
             'foto' => 'image|file',
             'username' => ['required' ,'min:3', 'max:125' , 'unique:users'],
             'email' => 'required|email:dns|unique:users',
-            'password' => 'required|min:5|max:125'
+            'password' => 'required|min:5|max:125',
+            'no_hp' => 'required|max:13'
         ]);
 
         if($request->file('foto')){

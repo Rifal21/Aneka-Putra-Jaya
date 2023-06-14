@@ -157,6 +157,18 @@
             </span>
           @enderror
         </label>
+        <label class="block text-sm mb-3">
+          <span class="text-gray-700 dark:text-gray-400">No HP</span>
+          <input name="no_hp" id="no_hp" type="text"
+            class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input @error('no_hp') is-invalid @enderror" value="{{ old('no_hp') }}"
+            placeholder="No HP"
+          />
+          @error('no_hp')
+            <span class="text-xs text-red-600 dark:text-red-400">
+              {{ $message }}
+            </span>
+          @enderror
+        </label>
 
         <label class="block text-sm mb-3">
           <span class="text-gray-700 dark:text-gray-400">Password</span>

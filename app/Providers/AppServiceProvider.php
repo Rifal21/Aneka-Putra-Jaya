@@ -26,12 +26,12 @@ class AppServiceProvider extends ServiceProvider
         Paginator::defaultView(view:'pagination::tailwind');
 
         Gate::define('admin' , function(User $user){
-            return $user->role_id === 1;
+            return $user->role_id  === 1;
         });
 
-        // Gate::define('pegawai' , function(User $user){
-        //     return $user->role_id === 3;
-        // });
+        Gate::define('pegawai' , function(User $user){
+            return $user->role_id === 3;
+        });
 
     }
 }

@@ -22,6 +22,7 @@
           <span class="block px-3 py-1 text-sm font-semibold text-gray-700">Role : {{ $item->name_role }}</span>
           @endforeach
           <span class="block px-3 py-1 text-sm font-semibold text-gray-700">Alamat : {{ $user->alamat }}</span>
+          <span class="block px-3 py-1 text-sm font-semibold text-gray-700">No HP : {{ $user->no_hp }}</span>
         </div>
         <a href="/dashboard/pengguna" class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-6 rounded-full flex items-center justify-center transition-all duration-300 ease-in-out transform hover:scale-110 mb-3">
             <i class="fas fa-arrow-left mr-3"></i>

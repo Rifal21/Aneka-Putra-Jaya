@@ -44,6 +44,7 @@ class DashboardPenggunaController extends Controller
             'email' => 'required|email:dns|unique:users',
             'foto' => 'image|file',
             'alamat' => 'required|max:125',
+            'no_hp' => 'required|max:13',
             'password' => 'required|min:5|max:125'
         ]);
 
@@ -96,6 +97,7 @@ class DashboardPenggunaController extends Controller
             'foto' => 'image|file',
             'password' => 'required|min:5|max:125',
             'alamat' => 'required|max:125',
+            'no_hp' => 'required|max:13',
         ];
 
 
