@@ -8,7 +8,7 @@
         @if ($produkdet->gambar)
             <img src="{{ asset('storage/' . $produkdet->gambar) }}" class="object-cover w-full h-full transition-all duration-300 ease-in-out transform hover:scale-110" alt="">
         @else
-            <img src="../../img/padi.jpeg" class="object-cover w-full h-full transition-all duration-300 ease-in-out transform hover:scale-110" alt="">
+            <img src="../../img/obat sample.jpeg" class="object-cover w-full h-full transition-all duration-300 ease-in-out transform hover:scale-110" alt="">
         @endif
       </div>
       <div class="w-full md:w-1/2">
@@ -17,7 +17,7 @@
           <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">{{ $produkdet->category->name }}</span>
           <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700">{{ $produkdet->outlet->name_outlet }}</span>
         </div>
-        <p class="text-gray-700 text-lg mb-4">{{ $produkdet->deskripsi }}</p>
+        <p class="text-gray-700 text-lg mb-4">{!! $produkdet->deskripsi !!}</p>
         <div class="mb-4">
           <div class="text-xl font-bold mb-2">Harga : {{ $produkdet->harga }},-</div>
           {{-- <div class="text-gray-700 text-base mb-2">Stok Tersedia: 10</div> --}}
@@ -37,20 +37,20 @@
           </div> --}}
           <div class="flex flex-wrap justify-center items-center space-x-4">
             <a @auth
-                href="https://api.whatsapp.com/send?phone=6287749323752&text=Hallo%20Admin!%0ASaya%20ingin%20memesan%20{{ $produkdet->nama_produk }}%0AHarga:%20{{ $produkdet->harga }}%0ANama_lengkap:%20{{ auth()->user()->name }}%0AAlamat:%20{{ auth()->user()->alamat }}" @else href="/login"
-                @endauth target="_blank" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-8 rounded-full flex items-center justify-center transition-all duration-300 ease-in-out transform hover:scale-110 mb-3">
+                href="https://api.whatsapp.com/send?phone=6287749323752&text=Hallo%20Admin!%0ASaya%20ingin%20memesan%20{{ $produkdet->nama_produk }}%0AHarga:%20{{ $produkdet->harga }}%0ANama_lengkap:%20{{ auth()->user()->name }}%0AAlamat:%20{{ auth()->user()->alamat }}%0AJumlah%20Pesanan:" target="_blank" @else href="/login"
+                @endauth  class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-8 rounded-full flex items-center justify-center transition-all duration-300 ease-in-out transform hover:scale-110 mb-3">
               <img src="../img/ico-whatsapp.png" alt="" class="mr-2" width="26" >
               <span>WhatsApp</span>
             </a>
-            <a href="#" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-9 rounded-full flex items-center justify-center transition-all duration-300 ease-in-out transform hover:scale-110 mb-3">
+            <a href="#" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-9 rounded-full flex items-center justify-center transition-all duration-300 ease-in-out transform hover:scale-110 mb-3" onclick="return alert('cooming soon bro 😎')">
               <img src="../img/ico-tokopedia.svg" alt="" class="mr-2">
               <span>Tokopedia</span>
             </a>
-            <a href="#" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-8 rounded-full flex items-center justify-center transition-all duration-300 ease-in-out transform hover:scale-110 mb-3">
+            <a href="#" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-8 rounded-full flex items-center justify-center transition-all duration-300 ease-in-out transform hover:scale-110 mb-3" onclick="return alert('cooming soon bro 😎')">
               <img src="../img/ico-shopee.svg" alt="" class="mr-2">
               <span>Shopee</span>
             </a>
-            <a href="/produk" class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-6 rounded-full flex items-center justify-center transition-all duration-300 ease-in-out transform hover:scale-110 mb-3">
+            <a href="/produk" class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-6 rounded-full flex items-center justify-center transition-all duration-300 ease-in-out transform hover:scale-110 mb-3" >
               <i class="fas fa-arrow-left mr-3"></i>
               <span>Kembali</span>
             </a>

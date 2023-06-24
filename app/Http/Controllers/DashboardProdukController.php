@@ -47,7 +47,7 @@ class DashboardProdukController extends Controller
             'outlet_id' => 'required',
             'gambar' => 'image|file',
             'harga' => 'required|max:125',
-            'deskripsi' => 'required|max:255'
+            'deskripsi' => 'required'
         ]);
 
         if($request->file('gambar')){
@@ -95,7 +95,7 @@ class DashboardProdukController extends Controller
             'category_id' => 'required',
             'gambar' => 'image|file',
             'harga' => 'required|max:125',
-            'deskripsi' => 'required|max:255'
+            'deskripsi' => 'required'
         ];
 
 

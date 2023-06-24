@@ -25,45 +25,30 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         User::create([
-            'name' => 'Rifal Kurniawan',
-            'username' => 'falkur21',
-            'email' => 'falkur@gmail.com',
+            'name' => 'Admin',
+            'username' => 'admin',
+            'email' => 'admin@gmail.com',
             'role_id' => 1,
-            'no_hp' => '087654234677',
-            'password' => bcrypt('falkur21')
-        ]);
-        User::create([
-            'name' => 'Rifal Kurniawan',
-            'username' => 'falkur212',
-            'email' => 'falkur1@gmail.com',
-            'role_id' => 2,
-            'no_hp' => '087654234677',
-            'password' => bcrypt('falkur21')
-        ]);
-        User::create([
-            'name' => 'Rifal Kurniawan',
-            'username' => 'falkur213',
-            'email' => 'falkur2@gmail.com',
-            'role_id' => 3,
-            'no_hp' => '087654234677',
-            'password' => bcrypt('falkur21')
+            'no_hp' => '9999999999',
+            'password' => bcrypt('admin')
         ]);
 
+
+        // Outlet::create([
+        //     'name_outlet' => 'Asem Kidul Ciawi',
+        //     'slug' => 'asem-kidul-ciawi'
+        // ]);
+        // Outlet::create([
+        //     'name_outlet' => 'Malangbong',
+        //     'slug' => 'malangbong'
+        // ]);
         Outlet::create([
-            'name_outlet' => 'Ciawi',
-            'slug' => 'ciawi'
-        ]);
-        Outlet::create([
-            'name_outlet' => 'Malangbong',
-            'slug' => 'malangbong'
-        ]);
-        Outlet::create([
-            'name_outlet' => 'Pasar Ciawi',
-            'slug' => 'pasar-ciawi'
+            'name_outlet' => 'Tasikmalaya',
+            'slug' => 'tasikmalaya'
         ]);
         Category::create([
-            'name' => 'Pupuk Organik',
-            'slug' => 'pupuk'
+            'name' => 'Obat Warung',
+            'slug' => 'obat-warung'
         ]);
         // Category::create([
         //     'name' => 'Alat Pertanian',
@@ -73,18 +58,18 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Benih Pertanian',
         //     'slug' => 'benih-pertanian'
         // ]);
-        Category::create([
-            'name' => 'Pupuk Non-organik',
-            'slug' => 'pupuk-non-organik'
-        ]);
-        Category::create([
-            'name' => 'Pupuk Kimia',
-            'slug' => 'pupuk-kimia'
-        ]);
-        Category::create([
-            'name' => 'Pupuk Hidroponik',
-            'slug' => 'pupuk-hidroponik'
-        ]);
+        // Category::create([
+        //     'name' => 'Pupuk Tunggal',
+        //     'slug' => 'pupuk-tunggal'
+        // ]);
+        // Category::create([
+        //     'name' => 'Pupuk Majemuk',
+        //     'slug' => 'pupuk-majemuk'
+        // ]);
+        // Category::create([
+        //     'name' => 'Pupuk Solulable',
+        //     'slug' => 'pupuk-solulable'
+        // ]);
         RoleUser::create([
             'name_role' => 'admin',
         ]);

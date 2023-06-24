@@ -42,7 +42,7 @@
               @if ($item->gambar)
                               <img src="{{ asset('storage/' . $item->gambar) }}" width="80" alt="">
               @else
-                              <img src="../../img/padi.jpeg" width="80" alt="">
+                              <img src="../../img/obat sample.jpeg" width="80" alt="">
               @endif
             </td>
             <td class="px-4 py-3 text-sm">

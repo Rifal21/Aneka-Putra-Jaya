@@ -12,8 +12,8 @@ class LoginController extends Controller
     public function index()
     {
         return view('login.index' ,[
-            'title' => "Aneka Login",
-            'gambar' => 'anekalogo.png',
+            'title' => "Al-Fazza Login",
+            'gambar' => 'al fazza.png',
             'outlets' => Outlet::all()
         ]);
             

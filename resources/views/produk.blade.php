@@ -12,7 +12,7 @@
           @if ($item->gambar)
             <img class="w-full h-64 object-cover" src="{{ asset('storage/' . $item->gambar) }}">
           @else
-            <img class="w-full h-64 object-cover" src="../../img/padi.jpeg">
+            <img class="w-full h-64 object-cover" src="../../img/obat sample.jpeg">
           @endif
           <div class="px-6 py-4">
             <div class="font-bold text-xl mb-2 text-center">{{ $item->nama_produk }}</div>

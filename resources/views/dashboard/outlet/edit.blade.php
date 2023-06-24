@@ -71,7 +71,7 @@
         </label>
 
         <label class="block text-sm mb-3">
-          <span class="text-gray-700 dark:text-gray-400">Upload Foto Pengguna</span>
+          <span class="text-gray-700 dark:text-gray-400">Upload Foto Outlet</span>
           <input type="hidden" name="foto_outlet_dulu" value="{{ $outlet->foto_outlet }}">
           @if ($outlet->foto_outlet)
             <img src="{{ asset('storage/' . $outlet->foto_outlet) }}" class="img-preview mb-3" width="150" alt="">

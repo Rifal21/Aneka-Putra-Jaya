@@ -83,12 +83,12 @@
             {{ $item->name_outlet }}
           </td>
           <td class="px-4 py-3 text-sm">
-            {{ $item->jadwal }}
+            {!! $item->jadwal !!}
           </td>
           <td class="px-4 py-3 text-sm">
             {{ $item->kontak }}
           </td>
-          <td class="px-4 py-3 text-sm">
+          <td class="px-4 py-3 text-sm truncate">
             {{ $item->kantor }}
           </td>
           <td class="px-4 py-3 text-sm">

@@ -13,7 +13,7 @@ class RegisterController extends Controller
     {
         return view('registrasi.index', [
             'title' => "Registrasi Akun",
-            'gambar' => 'anekalogo.png',
+            'gambar' => 'al fazza.png',
             'outlets' => Outlet::all()
         ]);
     }

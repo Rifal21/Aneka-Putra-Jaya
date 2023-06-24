@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('nama_produk');
             $table->string('slug')->unique();
             $table->string('gambar')->nullable();
-            $table->string('deskripsi');
+            $table->text('deskripsi');
             $table->string('harga');
             $table->timestamps();
         });

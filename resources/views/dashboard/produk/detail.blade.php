@@ -3,13 +3,13 @@
 @section('container')
   
 
-  <div class="max-w-4xl mx-auto mt-48">
+  <div class="max-w-4xl mx-auto mt-36">
     <div class="flex flex-wrap my-4">
       <div class="w-full md:w-1/2 md:pr-8">
         @if ($produk_satuan->gambar)
             <img src="{{ asset('storage/' . $produk_satuan->gambar) }}" class="object-cover w-full h-full transition-all duration-300 ease-in-out transform hover:scale-110" alt="">
         @else
-            <img src="https://source.unsplash.com/500x400?{{ $produk_satuan->category->name }}" class="object-cover w-full h-full transition-all duration-300 ease-in-out transform hover:scale-110" alt="">
+            <img src="../../img/obat sample.jpeg" class="object-cover w-full h-full transition-all duration-300 ease-in-out transform hover:scale-110" alt="">
         @endif
       </div>
       <div class="w-full md:w-1/2">
@@ -41,11 +41,11 @@
               <img src="../../img/ico-whatsapp.png" alt="" class="mr-2" width="26" >
               <span>WhatsApp</span>
             </a>
-            <a href="#" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-9 rounded-full flex items-center justify-center transition-all duration-300 ease-in-out transform hover:scale-110 mb-3">
+            <a href="#" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-9 rounded-full flex items-center justify-center transition-all duration-300 ease-in-out transform hover:scale-110 mb-3" onclick="return alert('cooming soon bro 😎')">
               <img src="../../img/ico-tokopedia.svg" alt="" class="mr-2">
               <span>Tokopedia</span>
             </a>
-            <a href="#" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-8 rounded-full flex items-center justify-center transition-all duration-300 ease-in-out transform hover:scale-110 mb-3">
+            <a href="#" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-8 rounded-full flex items-center justify-center transition-all duration-300 ease-in-out transform hover:scale-110 mb-3" onclick="return alert('cooming soon bro 😎')">
               <img src="../../img/ico-shopee.svg" alt="" class="mr-2">
               <span>Shopee</span>
             </a>

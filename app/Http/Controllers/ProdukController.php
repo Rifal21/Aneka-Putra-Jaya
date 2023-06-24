@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Produk;
 use App\Models\Category;
 use App\Models\Outlet;
+use Illuminate\Support\Facades\DB;
 
 class ProdukController extends Controller
 {
@@ -28,12 +29,12 @@ class ProdukController extends Controller
         ]);
     }
 
-    public function show(Produk $produk)
+    public function show(Produk $produk )
     {
         return view('produkdet', [
             'title' => 'Produk detail',
             'produkdet' => $produk,
-            'outlets' => Outlet::all()           
+            'outlets' => Outlet::all()       
         ]);        
     }
 }
